@@ -14,14 +14,21 @@
         /// <param name="finalYearGrade">Overall grade achieved in final year</param>
         /// <param name="placementYearGrade">Overall grade achieved in placement year, if taken.</param>
         /// <returns>The overall final grade achieved</returns>
-        public double CalculateFinalGrade(double secondYearGrade, double finalYearGrade, double placementYearGrade = -1)
+        public double? CalculateFinalGrade(double secondYearGrade, double finalYearGrade, double? placementYearGrade = null)
         {
-            if (placementYearGrade == -1)
+            if ( secondYearGrade < 0 || finalYearGrade < 0 || placementYearGrade < 0)
+            {
+                return null;
+            }
+
+            if (placementYearGrade == null)
             {
                 return Math.Round(secondYearGrade * 0.3 + finalYearGrade * 0.7,2);
             }
 
-            return Math.Round(secondYearGrade * 0.2 + placementYearGrade * 0.1 + finalYearGrade * 0.7,2);
+            double actualPlacementYear = (double)placementYearGrade;
+
+            return Math.Round(secondYearGrade * 0.2 + actualPlacementYear * 0.1 + finalYearGrade * 0.7,2);
         }
     }
 }

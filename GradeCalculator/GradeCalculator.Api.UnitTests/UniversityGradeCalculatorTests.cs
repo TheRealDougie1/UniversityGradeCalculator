@@ -40,5 +40,17 @@ namespace GradeCalculator.Api.UnitTests
         {
             sut.CalculateFinalGrade(secondYear, finalYear, placementYear).Should().Be(result);
         }
+
+        [TestCase(0, -1, 0, null)]
+        [TestCase(10, null, 10, 9)]
+        [TestCase(-10, -1, -30, null)]
+        [TestCase(-99999, -99999, -99999, null)]
+        [TestCase(-99.88, -1.23, 7.6, null)]
+        [TestCase(70.9, -1.23, 7.6, null)]
+        [TestCase(70.9, -0.1, 7.6, null)]
+        public void CalculateGradeAndTestValidation_CorrectProceduresFollowed(double secondYear, double placementYear, double finalYear, double? result)
+        {
+            sut.CalculateFinalGrade(secondYear, finalYear, placementYear).Should().Be(result);
+        }
     }
 }
