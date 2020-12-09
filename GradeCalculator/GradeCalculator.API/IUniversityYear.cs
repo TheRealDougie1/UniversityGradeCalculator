@@ -1,5 +1,7 @@
 ﻿namespace GradeCalculator.Api
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Interface for University Years.
     /// </summary>
@@ -12,5 +14,19 @@
         {
             get;
         }
+
+        /// <summary>
+        /// Gets a list of <see cref="IModule"/>s taken that year.
+        /// </summary>
+        List<IModule> ListOfModules
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Adds a Module to this <see cref="IUniversityYear"/>.
+        /// </summary>
+        /// <param name="module"> Module to add to the list</param>
+        void AddModule(IModule module);
     }
 }
