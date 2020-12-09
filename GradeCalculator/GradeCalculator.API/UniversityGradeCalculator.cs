@@ -16,19 +16,19 @@
         /// <returns>The overall final grade achieved</returns>
         public double? CalculateFinalGrade(double secondYearGrade, double finalYearGrade, double? placementYearGrade = null)
         {
-            if ( secondYearGrade < 0 || finalYearGrade < 0 || placementYearGrade < 0)
+            if (secondYearGrade < 0 || finalYearGrade < 0 || placementYearGrade < 0)
             {
                 return null;
             }
 
             if (placementYearGrade == null)
             {
-                return Math.Round(secondYearGrade * 0.3 + finalYearGrade * 0.7,2);
+                return Math.Round((secondYearGrade * 0.3) + (finalYearGrade * 0.7), 2);
             }
 
             double actualPlacementYear = (double)placementYearGrade;
 
-            return Math.Round(secondYearGrade * 0.2 + actualPlacementYear * 0.1 + finalYearGrade * 0.7,2);
+            return Math.Round((secondYearGrade * 0.2) + (actualPlacementYear * 0.1) + (finalYearGrade * 0.7), 2);
         }
     }
 }
