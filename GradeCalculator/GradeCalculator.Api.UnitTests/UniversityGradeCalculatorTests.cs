@@ -1,6 +1,5 @@
 namespace GradeCalculator.Api.UnitTests
 {
-    using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
     using GradeCalculator.Api;
     using NUnit.Framework;
