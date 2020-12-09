@@ -7,7 +7,7 @@ namespace GradeCalculator.Api.UnitTests
     /// <summary>
     /// Unit Tests for the <see cref="UniversityGradeCalculator"/> class
     /// </summary>
-    public class Tests
+    public class UniversityGradeCalculatorTests
     {
         private UniversityGradeCalculator sut;
 
