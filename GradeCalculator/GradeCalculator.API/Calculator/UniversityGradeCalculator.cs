@@ -1,4 +1,4 @@
-﻿namespace GradeCalculator.Api
+﻿namespace GradeCalculator.Api.Calculator
 {
     using System;
 
@@ -14,7 +14,7 @@
         /// <param name="finalYearGrade">Overall grade achieved in final year</param>
         /// <param name="placementYearGrade">Overall grade achieved in placement year, if taken.</param>
         /// <returns>The overall final grade achieved</returns>
-        public double? CalculateFinalGrade(double secondYearGrade, double finalYearGrade, double? placementYearGrade = null)
+        public static double? CalculateFinalGrade(double secondYearGrade, double finalYearGrade, double? placementYearGrade = null)
         {
             if (secondYearGrade < 0 || finalYearGrade < 0 || placementYearGrade < 0)
             {

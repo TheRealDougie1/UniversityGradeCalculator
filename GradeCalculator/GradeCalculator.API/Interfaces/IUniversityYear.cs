@@ -1,4 +1,4 @@
-﻿namespace GradeCalculator.Api
+﻿namespace GradeCalculator.Api.Interfaces
 {
     using System.Collections.Generic;
 
@@ -8,7 +8,7 @@
     public interface IUniversityYear
     {
         /// <summary>
-        /// Gets Total credits assigned to each year (Value should always be 120)
+        /// Gets total credits assigned to each year (Value should always be 120)
         /// </summary>
         int TotalCredits
         {
@@ -22,6 +22,11 @@
         {
             get;
         }
+
+        /// <summary>
+        /// Gets average score of the year.
+        /// </summary>
+        double AverageScore { get; }
 
         /// <summary>
         /// Adds a Module to this <see cref="IUniversityYear"/>.

@@ -1,7 +1,8 @@
-﻿namespace GradeCalculator.Api
+﻿namespace GradeCalculator.Api.Components
 {
     using System;
     using System.Text.RegularExpressions;
+    using GradeCalculator.Api.Interfaces;
 
     /// <summary>
     /// Module class, used to represent a Module within a <see cref="UniversityYear"/>

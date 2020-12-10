@@ -1,8 +1,9 @@
-﻿namespace GradeCalculator.Api.UnitTests
+﻿namespace GradeCalculator.Api.UnitTests.ComponentTests
 {
     using System;
     using FluentAssertions;
-    using GradeCalculator.Api;
+    using GradeCalculator.Api.Components;
+    using GradeCalculator.Api.Interfaces;
     using NUnit.Framework;
 
     /// <summary>
@@ -60,6 +61,18 @@
 
             sut.ListOfModules.Should().HaveCount(2);
             sut.TotalCredits.Should().Be(20);
+        }
+
+        [Test]
+        public void AddMultipleModulesWithScores_ScoresShouldBeUpdated()
+        {
+            Module moduleToAdd1 = new Module("Security", 10, 85);
+            sut.AddModule(moduleToAdd1);
+            Module moduleToAdd2 = new Module("Forensics", 10, 80);
+            sut.AddModule(moduleToAdd2);
+
+            sut.ListOfModules.Should().HaveCount(2);
+            sut.AverageScore.Should().Be(82.5);
         }
     }
 }

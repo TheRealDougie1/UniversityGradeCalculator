@@ -1,4 +1,4 @@
-﻿namespace GradeCalculator.Api
+﻿namespace GradeCalculator.Api.Interfaces
 {
     /// <summary>
     /// Interface for Modules within an <see cref="IUniversityYear"/>

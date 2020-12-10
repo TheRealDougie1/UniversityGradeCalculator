@@ -1,8 +1,9 @@
-﻿namespace GradeCalculator.Api.UnitTests
+﻿namespace GradeCalculator.Api.UnitTests.ComponentTests
 {
     using System;
     using FluentAssertions;
-    using GradeCalculator.Api;
+    using GradeCalculator.Api.Components;
+    using GradeCalculator.Api.Interfaces;
     using NUnit.Framework;
 
     /// <summary>

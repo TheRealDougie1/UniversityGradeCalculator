@@ -1,4 +1,4 @@
-﻿namespace GradeCalculator.Api
+﻿namespace GradeCalculator.Api.Interfaces
 {
     using System.Collections.Generic;
 
@@ -17,5 +17,11 @@
         /// </summary>
         /// <param name="universityYear"> University Year to Add </param>
         void AddYear(IUniversityYear universityYear);
+
+        /// <summary>
+        /// Calculates the overall grade of the <see cref="IUniversityDegree"/>
+        /// </summary>
+        /// <returns> The calculated degree percentage</returns>
+        double CalculateDegreePercentage();
     }
 }
