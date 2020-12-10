@@ -65,14 +65,49 @@
         public void CalculateFinalGradeWithSecondAndThirdYear_FinalGradeCalculated()
         {
             UniversityYear secondYear = new UniversityYear();
-            secondYear.AddModule(new Module("Second Year Module", 120, 70));
+            secondYear.AddModule(new Module("Second Year Module", 120, 80));
             UniversityYear thirdYear = new UniversityYear();
-            thirdYear.AddModule(new Module("Third Year Module", 120, 70));
+            thirdYear.AddModule(new Module("Third Year Module", 120, 60));
 
             sut.AddYear(secondYear);
             sut.AddYear(thirdYear);
 
-            sut.CalculateDegreePercentage().Should().Be(70);
+            sut.CalculateDegreePercentage().Should().Be(66.0);
+        }
+
+        [Test]
+        public void CalculateFinalGradeWithSecondThirdAndPlacementYear_FinalGradeCalculated()
+        {
+            UniversityYear secondYear = new UniversityYear();
+            secondYear.AddModule(new Module("Second Year Module", 120, 71.2));
+            UniversityYear placementYear = new UniversityYear();
+            placementYear.AddModule(new Module("Placement Year Module", 120, 86.6));
+            UniversityYear finalYear = new UniversityYear();
+            finalYear.AddModule(new Module("Final Year Module", 120, 65));
+
+            sut.AddYear(secondYear);
+            sut.AddYear(placementYear);
+            sut.AddYear(finalYear);
+
+            sut.CalculateDegreePercentage().Should().Be(68.4);
+        }
+
+        [Test]
+        public void CalculateFinalGradeWithYearsAddedInIncorrectOrder_CorrectFinalGradeCalculated()
+        {
+            UniversityYear secondYear = new UniversityYear();
+            secondYear.AddModule(new Module("Second Year Module", 120, 71.2));
+            UniversityYear placementYear = new UniversityYear();
+            placementYear.AddModule(new Module("Placement Year Module", 120, 86.6));
+            UniversityYear finalYear = new UniversityYear();
+            finalYear.AddModule(new Module("Final Year Module", 120, 65));
+
+            sut.AddYear(secondYear);
+            sut.AddYear(finalYear);
+            sut.AddYear(placementYear);
+            
+            // Need to have year identifying enums.
+            sut.CalculateDegreePercentage().Should().Be(68.4);
         }
     }
 }

@@ -46,6 +46,11 @@
                 return (double)UniversityGradeCalculator.CalculateFinalGrade(ListOfYears[0].AverageScore, ListOfYears[1].AverageScore);
             }
 
+            if (ListOfYears.Count == 3)
+            {
+                return (double)UniversityGradeCalculator.CalculateFinalGrade(ListOfYears[0].AverageScore, ListOfYears[2].AverageScore, ListOfYears[1].AverageScore);
+            }
+
             return 0;
         }
     }
