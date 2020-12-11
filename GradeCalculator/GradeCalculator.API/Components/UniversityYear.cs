@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using GradeCalculator.Api.Interfaces;
+    using GradeCalculator.Api.Utils;
 
     /// <summary>
     /// University Year class, used for holding information related to a particular University Year.
@@ -13,8 +14,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="UniversityYear"/> class.
         /// </summary>
-        public UniversityYear()
+        /// <param name="yearType"> Year Type</param>
+        public UniversityYear(UniversityYearClassification yearType = UniversityYearClassification.ThirdYear)
         {
+            YearType = yearType;
             TotalCredits = 0;
             ListOfModules = new List<IModule>();
             AverageScore = 0.00;
@@ -28,6 +31,9 @@
 
         /// <inheritdoc/>
         public double AverageScore { get; private set; }
+
+        /// <inheritdoc/>
+        public UniversityYearClassification YearType { get; private set; }
 
         /// <inheritdoc/>
         public void AddModule(IModule module)

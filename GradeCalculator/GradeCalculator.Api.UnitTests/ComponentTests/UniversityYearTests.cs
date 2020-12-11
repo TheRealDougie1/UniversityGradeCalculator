@@ -4,6 +4,7 @@
     using FluentAssertions;
     using GradeCalculator.Api.Components;
     using GradeCalculator.Api.Interfaces;
+    using GradeCalculator.Api.Utils;
     using NUnit.Framework;
 
     /// <summary>
@@ -16,7 +17,7 @@
         [SetUp]
         public void Setup()
         {
-            sut = new UniversityYear();
+            sut = new UniversityYear(UniversityYearClassification.ThirdYear);
         }
 
         [Test]
@@ -73,6 +74,14 @@
 
             sut.ListOfModules.Should().HaveCount(2);
             sut.AverageScore.Should().Be(82.5);
+        }
+
+        [Test]
+        public void ThirdYearInit_ShouldHaveSecondYearEnum()
+        {
+            sut = new UniversityYear(UniversityYearClassification.ThirdYear);
+            sut.YearType.Should().Be(UniversityYearClassification.ThirdYear);
+            sut.YearType.Should().Be(70);
         }
     }
 }
