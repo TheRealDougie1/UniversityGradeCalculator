@@ -77,11 +77,35 @@
         }
 
         [Test]
-        public void ThirdYearInit_ShouldHaveSecondYearEnum()
+        public void ThirdYearInit_ShouldHaveThirdYearEnum()
         {
             sut = new UniversityYear(UniversityYearClassification.ThirdYear);
             sut.YearType.Should().Be(UniversityYearClassification.ThirdYear);
             sut.YearType.Should().Be(70);
+        }
+
+        [Test]
+        public void SecondYearWithNoPlacementInit_ShouldHaveSecondYearNoPlacementEnum()
+        {
+            sut = new UniversityYear(UniversityYearClassification.SecondYearNoPlacement);
+            sut.YearType.Should().Be(UniversityYearClassification.SecondYearNoPlacement);
+            sut.YearType.Should().Be(30);
+        }
+
+        [Test]
+        public void SecondYearWithPlacementInit_ShouldHaveSecondYearWithPlacementEnum()
+        {
+            sut = new UniversityYear(UniversityYearClassification.SecondYearWithPlacement);
+            sut.YearType.Should().Be(UniversityYearClassification.SecondYearWithPlacement);
+            sut.YearType.Should().Be(20);
+        }
+
+        [Test]
+        public void PlacementYearInit_ShouldHavPlacementEnum()
+        {
+            sut = new UniversityYear(UniversityYearClassification.PlacementYear);
+            sut.YearType.Should().Be(UniversityYearClassification.PlacementYear);
+            sut.YearType.Should().Be(10);
         }
     }
 }
