@@ -6,9 +6,9 @@
     public enum UniversityYearClassification
     {
         /// <summary>
-        /// Third year identifier, with a value of 70.
+        /// Final year identifier, with a value of 70.
         /// </summary>
-        ThirdYear = 70,
+        FinalYear = 70,
 
         /// <summary>
         /// Second Year identifier, with a value of 30 as there is no placement year to account for.

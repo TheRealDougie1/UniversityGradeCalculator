@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using GradeCalculator.Api.Calculator;
     using GradeCalculator.Api.Interfaces;
+    using GradeCalculator.Api.Utils;
 
     /// <summary>
     /// University Degree class
@@ -41,17 +42,35 @@
         /// <inheritdoc/>
         public double CalculateDegreePercentage()
         {
-            if (ListOfYears.Count == 2)
+            UniversityYear secondYear = null;
+            UniversityYear finalYear = null;
+            UniversityYear placementYear = null;
+
+            foreach (UniversityYear universityYear in ListOfYears)
             {
-                return (double)UniversityGradeCalculator.CalculateFinalGrade(ListOfYears[0].AverageScore, ListOfYears[1].AverageScore);
+                switch (universityYear.YearType)
+                {
+                    case UniversityYearClassification.FinalYear:
+                        finalYear = universityYear;
+                        break;
+                    case UniversityYearClassification.PlacementYear:
+                        placementYear = universityYear;
+                        break;
+                    case UniversityYearClassification.SecondYearWithPlacement:
+                        secondYear = universityYear;
+                        break;
+                    case UniversityYearClassification.SecondYearNoPlacement:
+                        secondYear = universityYear;
+                        break;
+                }
             }
 
-            if (ListOfYears.Count == 3)
+            if (placementYear != null)
             {
-                return (double)UniversityGradeCalculator.CalculateFinalGrade(ListOfYears[0].AverageScore, ListOfYears[2].AverageScore, ListOfYears[1].AverageScore);
+                return (double)UniversityGradeCalculator.CalculateFinalGrade(secondYear.AverageScore, finalYear.AverageScore, placementYear.AverageScore);
             }
 
-            return 0;
+            return (double)UniversityGradeCalculator.CalculateFinalGrade(secondYear.AverageScore, finalYear.AverageScore);
         }
     }
 }

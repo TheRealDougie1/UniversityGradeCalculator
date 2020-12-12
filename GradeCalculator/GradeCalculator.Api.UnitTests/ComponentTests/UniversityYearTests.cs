@@ -17,7 +17,7 @@
         [SetUp]
         public void Setup()
         {
-            sut = new UniversityYear(UniversityYearClassification.ThirdYear);
+            sut = new UniversityYear(UniversityYearClassification.FinalYear);
         }
 
         [Test]
@@ -76,36 +76,15 @@
             sut.AverageScore.Should().Be(82.5);
         }
 
-        [Test]
-        public void ThirdYearInit_ShouldHaveThirdYearEnum()
+        [TestCase(UniversityYearClassification.FinalYear, 70)]
+        [TestCase(UniversityYearClassification.SecondYearNoPlacement, 30)]
+        [TestCase(UniversityYearClassification.SecondYearWithPlacement, 20)]
+        [TestCase(UniversityYearClassification.PlacementYear, 10)]
+        public void InitYearWithUniversityYearClassification_ShouldHaveCorrectEnum(UniversityYearClassification yearIdentifier, int percentage)
         {
-            sut = new UniversityYear(UniversityYearClassification.ThirdYear);
-            sut.YearType.Should().Be(UniversityYearClassification.ThirdYear);
-            sut.YearType.Should().Be(70);
-        }
-
-        [Test]
-        public void SecondYearWithNoPlacementInit_ShouldHaveSecondYearNoPlacementEnum()
-        {
-            sut = new UniversityYear(UniversityYearClassification.SecondYearNoPlacement);
-            sut.YearType.Should().Be(UniversityYearClassification.SecondYearNoPlacement);
-            sut.YearType.Should().Be(30);
-        }
-
-        [Test]
-        public void SecondYearWithPlacementInit_ShouldHaveSecondYearWithPlacementEnum()
-        {
-            sut = new UniversityYear(UniversityYearClassification.SecondYearWithPlacement);
-            sut.YearType.Should().Be(UniversityYearClassification.SecondYearWithPlacement);
-            sut.YearType.Should().Be(20);
-        }
-
-        [Test]
-        public void PlacementYearInit_ShouldHavPlacementEnum()
-        {
-            sut = new UniversityYear(UniversityYearClassification.PlacementYear);
-            sut.YearType.Should().Be(UniversityYearClassification.PlacementYear);
-            sut.YearType.Should().Be(10);
+            sut = new UniversityYear(yearIdentifier);
+            sut.YearType.Should().Be(yearIdentifier);
+            sut.YearType.Should().Be(percentage);
         }
     }
 }

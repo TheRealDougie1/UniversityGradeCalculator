@@ -4,6 +4,7 @@
     using FluentAssertions;
     using GradeCalculator.Api.Components;
     using GradeCalculator.Api.Interfaces;
+    using GradeCalculator.Api.Utils;
     using NUnit.Framework;
 
     /// <summary>
@@ -29,7 +30,7 @@
         [Test]
         public void AddYearWithNoOtherYearsAdded_YearShouldBeAdded()
         {
-            UniversityYear yearToAdd = new UniversityYear();
+            UniversityYear yearToAdd = new UniversityYear(UniversityYearClassification.SecondYearNoPlacement);
             yearToAdd.AddModule(new Module("Some Module", 120));
 
             Action addModuleAction = () => sut.AddYear(yearToAdd);
@@ -40,16 +41,16 @@
         [Test]
         public void AddYearWithMaximumYearsAlreadyAdded_ShouldThrowArgumentException()
         {
-            UniversityYear secondYear = new UniversityYear();
+            UniversityYear secondYear = new UniversityYear(UniversityYearClassification.SecondYearWithPlacement);
             secondYear.AddModule(new Module("Second Year Module", 120));
 
-            UniversityYear thirdYear = new UniversityYear();
+            UniversityYear thirdYear = new UniversityYear(UniversityYearClassification.FinalYear);
             thirdYear.AddModule(new Module("Third Year Module", 120));
 
-            UniversityYear placementYear = new UniversityYear();
+            UniversityYear placementYear = new UniversityYear(UniversityYearClassification.PlacementYear);
             placementYear.AddModule(new Module("Placement year Module", 120));
 
-            UniversityYear yearToBreak = new UniversityYear();
+            UniversityYear yearToBreak = new UniversityYear(UniversityYearClassification.FinalYear);
             yearToBreak.AddModule(new Module("Breaking year", 120));
 
             sut.AddYear(secondYear);
@@ -64,9 +65,9 @@
         [Test]
         public void CalculateFinalGradeWithSecondAndThirdYear_FinalGradeCalculated()
         {
-            UniversityYear secondYear = new UniversityYear();
+            UniversityYear secondYear = new UniversityYear(UniversityYearClassification.SecondYearNoPlacement);
             secondYear.AddModule(new Module("Second Year Module", 120, 80));
-            UniversityYear thirdYear = new UniversityYear();
+            UniversityYear thirdYear = new UniversityYear(UniversityYearClassification.FinalYear);
             thirdYear.AddModule(new Module("Third Year Module", 120, 60));
 
             sut.AddYear(secondYear);
@@ -78,11 +79,11 @@
         [Test]
         public void CalculateFinalGradeWithSecondThirdAndPlacementYear_FinalGradeCalculated()
         {
-            UniversityYear secondYear = new UniversityYear();
+            UniversityYear secondYear = new UniversityYear(UniversityYearClassification.SecondYearWithPlacement);
             secondYear.AddModule(new Module("Second Year Module", 120, 71.2));
-            UniversityYear placementYear = new UniversityYear();
+            UniversityYear placementYear = new UniversityYear(UniversityYearClassification.PlacementYear);
             placementYear.AddModule(new Module("Placement Year Module", 120, 86.6));
-            UniversityYear finalYear = new UniversityYear();
+            UniversityYear finalYear = new UniversityYear(UniversityYearClassification.FinalYear);
             finalYear.AddModule(new Module("Final Year Module", 120, 65));
 
             sut.AddYear(secondYear);
@@ -95,18 +96,18 @@
         [Test]
         public void CalculateFinalGradeWithYearsAddedInIncorrectOrder_CorrectFinalGradeCalculated()
         {
-            UniversityYear secondYear = new UniversityYear();
+            UniversityYear secondYear = new UniversityYear(UniversityYearClassification.SecondYearWithPlacement);
             secondYear.AddModule(new Module("Second Year Module", 120, 71.2));
-            UniversityYear placementYear = new UniversityYear();
+            UniversityYear placementYear = new UniversityYear(UniversityYearClassification.PlacementYear);
             placementYear.AddModule(new Module("Placement Year Module", 120, 86.6));
-            UniversityYear finalYear = new UniversityYear();
+            UniversityYear finalYear = new UniversityYear(UniversityYearClassification.FinalYear);
             finalYear.AddModule(new Module("Final Year Module", 120, 65));
 
             sut.AddYear(secondYear);
             sut.AddYear(finalYear);
             sut.AddYear(placementYear);
             
-            // Need to have year identifying enums.
+            // Need to have a test to alter secondyearnoplacement to secondyearwithplacement.
             sut.CalculateDegreePercentage().Should().Be(68.4);
         }
     }

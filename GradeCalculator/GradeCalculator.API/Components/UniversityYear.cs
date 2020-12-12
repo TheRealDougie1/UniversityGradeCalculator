@@ -15,7 +15,7 @@
         /// Initializes a new instance of the <see cref="UniversityYear"/> class.
         /// </summary>
         /// <param name="yearType"> Year Type</param>
-        public UniversityYear(UniversityYearClassification yearType = UniversityYearClassification.ThirdYear)
+        public UniversityYear(UniversityYearClassification yearType)
         {
             YearType = yearType;
             TotalCredits = 0;
