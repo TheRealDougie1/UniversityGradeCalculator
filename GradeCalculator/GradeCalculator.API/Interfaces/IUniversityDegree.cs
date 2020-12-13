@@ -1,7 +1,5 @@
 ﻿namespace GradeCalculator.Api.Interfaces
 {
-    using System.Collections.Generic;
-
     /// <summary>
     /// Interface for University Degree Classes.
     /// </summary>
