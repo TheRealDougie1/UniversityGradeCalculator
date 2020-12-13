@@ -54,5 +54,11 @@
 
             AverageScore = listOfModuleScores.Average();
         }
+
+        /// <inheritdoc/>
+        public void SetYearType(UniversityYearClassification newYearType)
+        {
+            YearType = newYearType;
+        }
     }
 }

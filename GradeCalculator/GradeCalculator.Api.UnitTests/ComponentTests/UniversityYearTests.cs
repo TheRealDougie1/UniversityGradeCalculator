@@ -86,5 +86,20 @@
             sut.YearType.Should().Be(yearIdentifier);
             sut.YearType.Should().Be(percentage);
         }
+
+        [TestCase(UniversityYearClassification.SecondYearNoPlacement, 30, UniversityYearClassification.SecondYearWithPlacement)]
+        [TestCase(UniversityYearClassification.SecondYearWithPlacement, 20, UniversityYearClassification.SecondYearNoPlacement)]
+        public void SetNewYearType_UniversityYearClassificationUpdated(
+            UniversityYearClassification yearIdentifier,
+            int percentage,
+            UniversityYearClassification updatedYearIdentifier)
+        {
+            sut = new UniversityYear(yearIdentifier);
+            sut.YearType.Should().Be(yearIdentifier);
+            sut.YearType.Should().Be(percentage);
+
+            sut.SetYearType(updatedYearIdentifier);
+            sut.YearType.Should().Be(updatedYearIdentifier);
+        } 
     }
 }

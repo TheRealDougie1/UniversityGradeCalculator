@@ -33,5 +33,11 @@
         /// </summary>
         /// <param name="module"> Module to add to the list</param>
         void AddModule(IModule module);
+
+        /// <summary>
+        /// Sets a new Year Classification
+        /// </summary>
+        /// <param name="newYearType"> New year identifier.</param>
+        void SetYearType(UniversityYearClassification newYearType);
     }
 }

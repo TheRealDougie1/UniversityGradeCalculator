@@ -8,11 +8,6 @@
     public interface IUniversityDegree
     {
         /// <summary>
-        /// Gets a list of <see cref="IUniversityYear"/>s
-        /// </summary>
-        List<IUniversityYear> ListOfYears { get; }
-
-        /// <summary>
         /// Add a <see cref="IUniversityYear"/>  to <see cref="ListOfYears"/>
         /// </summary>
         /// <param name="universityYear"> University Year to Add </param>
