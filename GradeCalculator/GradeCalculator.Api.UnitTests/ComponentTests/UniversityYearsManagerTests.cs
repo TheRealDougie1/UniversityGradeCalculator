@@ -57,6 +57,18 @@
         }
 
         [Test]
+        public void SecondYearAddedAfterPlacement_PlacementYearSetAndSecondYearUpdated()
+        {
+            var placementYear = new UniversityYear(UniversityYearClassification.PlacementYear);
+            sut.AddYear(placementYear);
+            sut.PlacementYear.Should().Be(placementYear);
+
+            var secondYear = new UniversityYear(UniversityYearClassification.SecondYearNoPlacement);
+            sut.AddYear(secondYear);
+            sut.SecondYear.YearType.Should().Be(UniversityYearClassification.SecondYearWithPlacement);
+        }
+
+        [Test]
         public void AddDuplicateYear_YearUpdated()
         {
             var secondYear = new UniversityYear(UniversityYearClassification.SecondYearNoPlacement);

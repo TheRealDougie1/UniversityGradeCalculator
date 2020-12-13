@@ -44,6 +44,11 @@
                     return;
                 case UniversityYearClassification.SecondYearNoPlacement:
                     SecondYear = yearToAdd;
+                    if (PlacementYear != null)
+                    {
+                        SecondYear.SetYearType(UniversityYearClassification.SecondYearWithPlacement);
+                    }
+
                     return;
                 case UniversityYearClassification.SecondYearWithPlacement:
                     SecondYear = yearToAdd;
