@@ -45,20 +45,24 @@
 
             TotalCredits += module.Credits;
             ListOfModules.Add(module);
-
-            var listOfModuleScores = new List<double>();
-            foreach (IModule addedModule in ListOfModules) 
-            {
-                listOfModuleScores.Add(addedModule.OverallPercentage);
-            }
-
-            AverageScore = listOfModuleScores.Average();
+            UpdateAverageScore();
         }
 
         /// <inheritdoc/>
         public void SetYearType(UniversityYearClassification newYearType)
         {
             YearType = newYearType;
+        }
+
+        private void UpdateAverageScore()
+        {
+            var cumultiveAverage = 0.00;
+            foreach (Module module in ListOfModules)
+            {
+                cumultiveAverage += module.OverallPercentage * (double)module.Credits / (double)TotalCredits;
+            }
+
+            AverageScore = Math.Round(cumultiveAverage, 2);
         }
     }
 }

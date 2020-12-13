@@ -100,6 +100,32 @@
 
             sut.SetYearType(updatedYearIdentifier);
             sut.YearType.Should().Be(updatedYearIdentifier);
-        } 
+        }
+        
+        [Test]
+        public void Add120CreditsWorthOfModules_AverageGradeIsCorrect()
+        {
+            Module moduleToAdd1 = new Module("OOADS", 20, 76);
+            Module moduleToAdd2 = new Module("Comm Networks", 20, 62);
+            Module moduleToAdd3 = new Module("Group Project", 20, 72);
+            Module moduleToAdd4 = new Module("Enterprise Architecture", 10, 86);
+            Module moduleToAdd5 = new Module("Systems Modelling", 10, 71);
+            Module moduleToAdd6 = new Module("Employability", 10, 71);
+            Module moduleToAdd7 = new Module("Data Vis", 10, 60);
+            Module moduleToAdd8 = new Module("DB systems", 10, 71);
+            Module moduleToAdd9 = new Module("HCI", 10, 73);
+
+            sut.AddModule(moduleToAdd1);
+            sut.AddModule(moduleToAdd2);
+            sut.AddModule(moduleToAdd3);
+            sut.AddModule(moduleToAdd4);
+            sut.AddModule(moduleToAdd5);
+            sut.AddModule(moduleToAdd6);
+            sut.AddModule(moduleToAdd7);
+            sut.AddModule(moduleToAdd8);
+            sut.AddModule(moduleToAdd9);
+
+            sut.AverageScore.Should().Be(71);
+        }
     }
 }

@@ -17,16 +17,16 @@
         /// <param name="overallPercentage"> Percentage earned on the module. </param>
         public Module(string moduleName, int credits, double? overallPercentage = null)
         {
-            Regex nameRX = new Regex(@"[a-z]");
+            Regex nameRX = new Regex(@"[A-Za-z]");
 
             if (!nameRX.IsMatch(moduleName)) 
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Module Name does not satisfy Regex.");
             }
 
             if (credits < 0 || credits > 120)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Invalid Credits.");
             }
 
             ModuleName = moduleName;
