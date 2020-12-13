@@ -1,13 +1,13 @@
-namespace GradeCalculator.Api.UnitTests
+namespace GradeCalculator.Api.UnitTests.Calculator
 {
     using FluentAssertions;
-    using GradeCalculator.Api;
+    using GradeCalculator.Api.Calculator;
     using NUnit.Framework;
 
     /// <summary>
     /// Unit Tests for the <see cref="UniversityGradeCalculator"/> class
     /// </summary>
-    public class Tests
+    public class UniversityGradeCalculatorTests
     {
         private UniversityGradeCalculator sut;
 
@@ -25,7 +25,7 @@ namespace GradeCalculator.Api.UnitTests
         [TestCase(99.9, 99.3, 99.48)]
         public void CalculateGradeUsingSecondAndFinalYear_CorrectGradeReturned(double secondYear, double finalYear, double result)
         {
-            sut.CalculateFinalGrade(secondYear, finalYear).Should().Be(result);
+            UniversityGradeCalculator.CalculateFinalGrade(secondYear, finalYear).Should().Be(result);
         }
 
         [TestCase(70, 70, 70, 70)]
@@ -38,7 +38,7 @@ namespace GradeCalculator.Api.UnitTests
         [TestCase(45.8, 69.1, 50.0, 51.07)]
         public void CalculateGradeUsingSecondPlacementAndFinalYear_CorrectGradeReturned(double secondYear, double placementYear, double finalYear, double result)
         {
-            sut.CalculateFinalGrade(secondYear, finalYear, placementYear).Should().Be(result);
+            UniversityGradeCalculator.CalculateFinalGrade(secondYear, finalYear, placementYear).Should().Be(result);
         }
 
         [TestCase(0, -1, 0, null)]
@@ -50,7 +50,7 @@ namespace GradeCalculator.Api.UnitTests
         [TestCase(70.9, -0.1, 7.6, null)]
         public void CalculateGradeAndTestValidation_CorrectProceduresFollowed(double secondYear, double placementYear, double finalYear, double? result)
         {
-            sut.CalculateFinalGrade(secondYear, finalYear, placementYear).Should().Be(result);
+            UniversityGradeCalculator.CalculateFinalGrade(secondYear, finalYear, placementYear).Should().Be(result);
         }
     }
 }
