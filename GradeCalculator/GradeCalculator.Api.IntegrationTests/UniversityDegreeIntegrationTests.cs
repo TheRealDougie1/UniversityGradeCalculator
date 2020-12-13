@@ -1,0 +1,83 @@
+namespace GradeCalculator.Api.IntegrationTests
+{
+    using FluentAssertions;
+    using GradeCalculator.Api.Components;
+    using GradeCalculator.Api.Interfaces;
+    using GradeCalculator.Api.Utils;
+    using NUnit.Framework;
+
+    public class UniversityDegreeIntegrationTests
+    {
+        private IUniversityDegree sut;
+        [SetUp]
+        public void Setup()
+        {
+            sut = new UniversityDegree();
+        }
+
+        [Test]
+        public void CalculateDegreePercentageNoPlacement_ReturnsCorrectResults()
+        {
+            // Set up second year
+            UniversityYear secondYear = new UniversityYear(UniversityYearClassification.SecondYearNoPlacement);
+            secondYear.AddModule(new Module("OOADS", 20, 76));
+            secondYear.AddModule(new Module("Comm Networks", 20, 62));
+            secondYear.AddModule(new Module("Group Project", 20, 72));
+            secondYear.AddModule(new Module("Enterprise Architecture", 10, 86));
+            secondYear.AddModule(new Module("Systems Modelling", 10, 71));
+            secondYear.AddModule(new Module("Employability", 10, 71));
+            secondYear.AddModule(new Module("Data Vis", 10, 60));
+            secondYear.AddModule(new Module("DB systems", 10, 71));
+            secondYear.AddModule(new Module("HCI", 10, 73));
+
+            // Set up final year
+            UniversityYear finalYear = new UniversityYear(UniversityYearClassification.FinalYear);
+            finalYear.AddModule(new Module("Security", 10, 81.8));
+            finalYear.AddModule(new Module("Forensics", 10, 95.3));
+            finalYear.AddModule(new Module("Knowledge Management", 20, 72));
+            finalYear.AddModule(new Module("LSD", 20, 69));
+            finalYear.AddModule(new Module("Emerging Tech", 20, 75));
+            finalYear.AddModule(new Module("Individual Project", 40, 68));
+
+            sut.AddYear(secondYear);
+            sut.AddYear(finalYear);
+
+            sut.CalculateDegreePercentage().Should().Be(72.69);
+        }
+
+        [Test]
+        public void CalculateDegreePercentageWithPlacement_ReturnsCorrectResults()
+        {
+            // Set up second year
+            UniversityYear secondYear = new UniversityYear(UniversityYearClassification.SecondYearNoPlacement);
+            secondYear.AddModule(new Module("OOADS", 20, 76));
+            secondYear.AddModule(new Module("Comm Networks", 20, 62));
+            secondYear.AddModule(new Module("Group Project", 20, 72));
+            secondYear.AddModule(new Module("Enterprise Architecture", 10, 86));
+            secondYear.AddModule(new Module("Systems Modelling", 10, 71));
+            secondYear.AddModule(new Module("Employability", 10, 71));
+            secondYear.AddModule(new Module("Data Vis", 10, 60));
+            secondYear.AddModule(new Module("DB systems", 10, 71));
+            secondYear.AddModule(new Module("HCI", 10, 73));
+
+            // Set up placement year
+            UniversityYear placementYear = new UniversityYear(UniversityYearClassification.PlacementYear);
+            placementYear.AddModule(new Module("Placement module", 120, 86));
+
+            // Set up final year
+            UniversityYear finalYear = new UniversityYear(UniversityYearClassification.FinalYear);
+            finalYear.AddModule(new Module("Security", 10, 81.8));
+            finalYear.AddModule(new Module("Forensics", 10, 95.3));
+            finalYear.AddModule(new Module("Knowledge Management", 20, 72));
+            finalYear.AddModule(new Module("LSD", 20, 69));
+            finalYear.AddModule(new Module("Emerging Tech", 20, 75));
+            finalYear.AddModule(new Module("Individual Project", 40, 68));
+
+            sut.AddYear(secondYear);
+            sut.AddYear(placementYear);
+            sut.AddYear(finalYear);
+
+            sut.CalculateDegreePercentage().Should().Be(74.19);
+        }
+    }
+}
