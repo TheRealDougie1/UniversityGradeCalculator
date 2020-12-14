@@ -9,14 +9,6 @@ namespace GradeCalculator.Api.UnitTests.Calculator
     /// </summary>
     public class UniversityGradeCalculatorTests
     {
-        private UniversityGradeCalculator sut;
-
-        [SetUp]
-        public void Setup()
-        {
-            sut = new UniversityGradeCalculator();
-        }
-
         [TestCase(70, 70, 70)]
         [TestCase(30, 95, 75.5)]
         [TestCase(95, 30, 49.5)]
