@@ -1,10 +1,17 @@
 ﻿namespace GradeCalculator.Api.Interfaces
 {
+    using GradeCalculator.Api.Utils;
+
     /// <summary>
     /// Interface for University Degree Classes.
     /// </summary>
     public interface IUniversityDegree
     {
+        /// <summary>
+        /// Gets the Degree Classification of this Degree.
+        /// </summary>
+        UniversityDegreeClassification DegreeClassification { get; }
+
         /// <summary>
         /// Add a <see cref="IUniversityYear"/>  to <see cref="ListOfYears"/>
         /// </summary>

@@ -43,6 +43,7 @@ namespace GradeCalculator.Api.IntegrationTests
             sut.AddYear(finalYear);
 
             sut.CalculateDegreePercentage().Should().Be(72.69);
+            sut.DegreeClassification.Should().Be(UniversityDegreeClassification.FirstClassHonour);
         }
 
         [Test]
@@ -78,6 +79,7 @@ namespace GradeCalculator.Api.IntegrationTests
             sut.AddYear(finalYear);
 
             sut.CalculateDegreePercentage().Should().Be(74.19);
+            sut.DegreeClassification.Should().Be(UniversityDegreeClassification.FirstClassHonour);
         }
 
         [Test]
@@ -108,6 +110,7 @@ namespace GradeCalculator.Api.IntegrationTests
             sut.AddYear(finalYear);
 
             sut.CalculateDegreePercentage().Should().Be(72.69);
+            sut.DegreeClassification.Should().Be(UniversityDegreeClassification.FirstClassHonour);
         }
     }
 }

@@ -25,4 +25,35 @@
         /// </summary>
         PlacementYear = 10
     }
+
+    /// <summary>
+    /// Enum for the type of Degree Classification
+    /// </summary>
+    public enum UniversityDegreeClassification
+    {
+        /// <summary>
+        /// First Class classification.
+        /// </summary>
+        FirstClassHonour,
+
+        /// <summary>
+        /// Upper Second Class (2:1)
+        /// </summary>
+        UpperSecondClassHonour,
+
+        /// <summary>
+        /// Lower Second Class (2:2)
+        /// </summary>
+        LowerSecondClassHonour,
+
+        /// <summary>
+        /// Third Class
+        /// </summary>
+        ThirdClassHonour,
+
+        /// <summary>
+        /// Fail classification
+        /// </summary>
+        Fail
+    }
 }
