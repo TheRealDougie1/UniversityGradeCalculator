@@ -42,6 +42,7 @@
             sut.AddYear(thirdYear);
 
             sut.CalculateDegreePercentage().Should().Be(66.0);
+            sut.DegreeClassification.Should().Be(UniversityDegreeClassification.UpperSecondClassHonour);
         }
 
         [Test]
@@ -59,6 +60,7 @@
             sut.AddYear(finalYear);
 
             sut.CalculateDegreePercentage().Should().Be(68.4);
+            sut.DegreeClassification.Should().Be(UniversityDegreeClassification.UpperSecondClassHonour);
         }
 
         [Test]
@@ -75,8 +77,26 @@
             sut.AddYear(finalYear);
             sut.AddYear(placementYear);
             
-            // Need to have a test to alter secondyearnoplacement to secondyearwithplacement.
             sut.CalculateDegreePercentage().Should().Be(68.4);
+            sut.DegreeClassification.Should().Be(UniversityDegreeClassification.UpperSecondClassHonour);
+        }
+
+        [Test]
+        public void CalculateDegreePercentageBelowPass_GradeClassificationShouldBeFail()
+        {
+            UniversityYear secondYear = new UniversityYear(UniversityYearClassification.SecondYearWithPlacement);
+            secondYear.AddModule(new Module("Second Year Module", 120, 30));
+            UniversityYear placementYear = new UniversityYear(UniversityYearClassification.PlacementYear);
+            placementYear.AddModule(new Module("Placement Year Module", 120, 12));
+            UniversityYear finalYear = new UniversityYear(UniversityYearClassification.FinalYear);
+            finalYear.AddModule(new Module("Final Year Module", 120, 10));
+
+            sut.AddYear(secondYear);
+            sut.AddYear(finalYear);
+            sut.AddYear(placementYear);
+
+            sut.CalculateDegreePercentage().Should().Be(14.2);
+            sut.DegreeClassification.Should().Be(UniversityDegreeClassification.Fail);
         }
     }
 }
