@@ -43,5 +43,39 @@
             Action actionOfInitModule = () => sut = new Module(moduleName, credits, overallPercentage);
             actionOfInitModule.Should().ThrowExactly<ArgumentException>();
         }
+
+        [Test]
+        public void AddAssignment_AssignmentAdded()
+        {
+            sut = new Module("Generic Module", 10);
+            Assignment assignmentToAdd = new Assignment("Exam 1", 50, 70);
+            sut.AddAssignment(assignmentToAdd);
+            sut.ListOfAssignments.Should().HaveCount(1);
+        }
+
+        [TestCase("Generic Module With Overall Percentage", 10, 70)]
+        [TestCase("Generic Module Without Overall Percentage", 10)]
+        public void AddAssignment_ModuleOverallPercentageChanged(string moduleName, int credits, double? overallPercentage = null)
+        {
+            sut = new Module(moduleName, credits, overallPercentage);
+            Assignment assignmentToAdd = new Assignment("Exam 1", 100, 30);
+            sut.AddAssignment(assignmentToAdd);
+            sut.OverallPercentage.Should().Be(30);
+        }
+
+        [Test]
+        public void AddMultipleAssignments_ModuleOverallPercentageCalculated()
+        {
+            sut = new Module("Generic Module", 10);
+            Assignment assignmentToAdd1 = new Assignment("Exam 1", 33, 69.7);
+            Assignment assignmentToAdd2 = new Assignment("Exam 2", 33, 93.9);
+            Assignment assignmentToAdd3 = new Assignment("Exam 3", 34, 70);
+
+            sut.AddAssignment(assignmentToAdd1);
+            sut.AddAssignment(assignmentToAdd2);
+            sut.AddAssignment(assignmentToAdd3);
+
+            sut.OverallPercentage.Should().Be(77.79);
+        }
     }
 }
