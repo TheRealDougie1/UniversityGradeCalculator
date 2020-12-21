@@ -1,6 +1,7 @@
 ﻿namespace GradeCalculator.Api.Components
 {
     using System;
+    using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using GradeCalculator.Api.Interfaces;
 
@@ -17,6 +18,8 @@
         /// <param name="overallPercentage"> Percentage earned on the module. </param>
         public Module(string moduleName, int credits, double? overallPercentage = null)
         {
+            ListOfAssignments = new List<IAssignment>();
+
             Regex nameRX = new Regex(@"[A-Za-z]");
 
             if (!nameRX.IsMatch(moduleName)) 
@@ -47,6 +50,9 @@
         }
 
         /// <inheritdoc/>
+        public List<IAssignment> ListOfAssignments { get; private set; }
+
+        /// <inheritdoc/>
         public string ModuleName { get; private set; }
 
         /// <inheritdoc/>
@@ -54,5 +60,24 @@
 
         /// <inheritdoc/>
         public double OverallPercentage { get; private set; }
+
+        /// <inheritdoc/>
+        public void AddAssignment(IAssignment assignment)
+        {
+            ListOfAssignments.Add(assignment);
+            UpdateOverallPercentage();
+        }
+
+        private void UpdateOverallPercentage()
+        {
+            double cumultiveMark = 0.00;
+
+            foreach (IAssignment assignment in ListOfAssignments)
+            {
+                cumultiveMark += assignment.OverallMark * (double)(assignment.Weighting / (double)100);
+            }
+
+            OverallPercentage = Math.Round(cumultiveMark, 2);
+        }
     }
 }
