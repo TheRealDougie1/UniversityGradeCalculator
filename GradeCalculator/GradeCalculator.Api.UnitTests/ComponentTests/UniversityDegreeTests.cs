@@ -98,5 +98,22 @@
             sut.CalculateDegreePercentage().Should().Be(14.2);
             sut.DegreeClassification.Should().Be(UniversityDegreeClassification.Fail);
         }
+
+        [Test]
+        public void CalculateRemainingAverageScoreRequired_CorrectRemainderCalculated()
+        {
+            UniversityYear secondYear = new UniversityYear(UniversityYearClassification.SecondYearWithPlacement);
+            secondYear.AddModule(new Module("Second Year Module", 120, 71.2));
+            UniversityYear placementYear = new UniversityYear(UniversityYearClassification.PlacementYear);
+            placementYear.AddModule(new Module("Placement Year Module", 120, 86.6));
+            UniversityYear finalYear = new UniversityYear(UniversityYearClassification.FinalYear);
+            finalYear.AddModule(new Module("Final Year Module", 60, 50));
+
+            sut.AddYear(secondYear);
+            sut.AddYear(finalYear);
+            sut.AddYear(placementYear);
+
+            sut.CalculateRemainingAverageScoreRequired(70);
+        }
     }
 }

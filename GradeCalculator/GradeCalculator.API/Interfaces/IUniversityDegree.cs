@@ -23,5 +23,12 @@
         /// </summary>
         /// <returns> The calculated degree percentage</returns>
         double CalculateDegreePercentage();
+
+        /// <summary>
+        /// Calculates the remaining average score required to get the target grade
+        /// </summary>
+        /// <param name="targetGrade"> Target grade to get </param>
+        /// <returns>The remaining average score required to the get the target grade</returns>
+        double CalculateRemainingAverageScoreRequired(double targetGrade);
     }
 }

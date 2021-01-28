@@ -1,5 +1,6 @@
 ﻿namespace GradeCalculator.Api.Components
 {
+    using System.Collections.Generic;
     using GradeCalculator.Api.Calculator;
     using GradeCalculator.Api.Interfaces;
     using GradeCalculator.Api.Utils;
@@ -49,6 +50,42 @@
             UpdateDegreeClassification(calculatedPercentage);
 
             return calculatedPercentage;
+        }
+    
+        /// <inheritdoc/>
+        public double CalculateRemainingAverageScoreRequired(double targetGrade)
+        {
+            List<IUniversityYear> listOfUniversityYears = new List<IUniversityYear>
+            {
+                yearsManager.SecondYear,
+                yearsManager.PlacementYear,
+                yearsManager.FinalYear
+            };
+
+            List<IUniversityYear> unfinishedYears = new List<IUniversityYear>();
+
+            foreach (IUniversityYear universityYear in listOfUniversityYears)
+            {
+                if (universityYear.TotalCredits != 120)
+                {
+                    unfinishedYears.Add(universityYear);
+                }
+            }
+
+            foreach (IUniversityYear unfinishedYear in unfinishedYears)
+            {
+                double remainingWeighting = (double)(120 - unfinishedYear.TotalCredits) / 100;
+                for (int i = 0; i != 100; i++)
+                {
+                    double scoreToGet = unfinishedYear.AverageScore + (i * remainingWeighting);
+                    if (scoreToGet >= targetGrade)
+                    {
+                        return i;
+                    }
+                }
+            }
+
+            return 0.00;
         }
 
         /// <summary>
