@@ -19,7 +19,8 @@
             YearType = yearType;
             TotalCredits = 0;
             ListOfModules = new List<IModule>();
-            AverageScore = 0.00;
+            CurrentAverageScore = 0.00;
+            SecuredScore = 0.00;
         }
 
         /// <inheritdoc/>
@@ -29,7 +30,10 @@
         public List<IModule> ListOfModules { get; private set; }
 
         /// <inheritdoc/>
-        public double AverageScore { get; private set; }
+        public double CurrentAverageScore { get; private set; }
+
+        /// <inheritdoc/>
+        public double SecuredScore { get; private set; }
 
         /// <inheritdoc/>
         public UniversityYearClassification YearType { get; private set; }
@@ -45,6 +49,7 @@
             TotalCredits += module.Credits;
             ListOfModules.Add(module);
             UpdateAverageScore();
+            UpdateSecuredScore();
         }
 
         /// <inheritdoc/>
@@ -61,7 +66,18 @@
                 cumultiveAverage += module.OverallPercentage * (double)module.Credits / (double)TotalCredits;
             }
 
-            AverageScore = Math.Round(cumultiveAverage, 2);
+            CurrentAverageScore = Math.Round(cumultiveAverage, 2);
+        }
+
+        private void UpdateSecuredScore()
+        {
+            var securedTotal = 0.00;
+            foreach (Module module in ListOfModules)
+            {
+                securedTotal += module.OverallPercentage / (double)module.Credits;
+            }
+
+            SecuredScore = securedTotal;
         }
     }
 }

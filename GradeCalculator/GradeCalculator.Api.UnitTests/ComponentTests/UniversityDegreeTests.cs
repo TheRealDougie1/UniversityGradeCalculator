@@ -113,7 +113,7 @@
             sut.AddYear(finalYear);
             sut.AddYear(placementYear);
 
-            sut.CalculateRemainingAverageScoreRequired(70);
+            sut.CalculateRemainingAverageScoreRequired(65).Should().Be(70);
         }
     }
 }

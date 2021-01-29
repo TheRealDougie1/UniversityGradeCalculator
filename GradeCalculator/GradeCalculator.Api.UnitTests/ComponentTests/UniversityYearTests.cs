@@ -73,7 +73,8 @@
             sut.AddModule(moduleToAdd2);
 
             sut.ListOfModules.Should().HaveCount(2);
-            sut.AverageScore.Should().Be(82.5);
+            sut.CurrentAverageScore.Should().Be(82.5);
+            sut.SecuredScore.Should().Be(16.5);
         }
 
         [TestCase(UniversityYearClassification.FinalYear, 70)]
@@ -125,7 +126,7 @@
             sut.AddModule(moduleToAdd8);
             sut.AddModule(moduleToAdd9);
 
-            sut.AverageScore.Should().Be(71);
+            sut.CurrentAverageScore.Should().Be(71);
         }
     }
 }

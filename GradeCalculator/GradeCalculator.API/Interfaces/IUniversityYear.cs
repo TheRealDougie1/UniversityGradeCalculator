@@ -19,9 +19,14 @@
         List<IModule> ListOfModules { get; }
 
         /// <summary>
-        /// Gets average score of the year.
+        /// Gets the total score of the year; the score is calculated out of 120, not whatever the amount of modules is.
         /// </summary>
-        double AverageScore { get; }
+        double SecuredScore { get; }
+
+        /// <summary>
+        /// Gets the current average score of the year. This is the sum of all modules which have been taken thus far, which may not add up to 120 credits.
+        /// </summary>
+        double CurrentAverageScore { get; }
 
         /// <summary>
         /// Gets the year type of the <see cref="IUniversityYear"/>

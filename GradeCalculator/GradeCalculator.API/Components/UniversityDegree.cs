@@ -40,11 +40,11 @@
 
             if (yearsManager.PlacementYear != null)
             {
-                calculatedPercentage = (double)UniversityGradeCalculator.CalculateFinalGrade(yearsManager.SecondYear.AverageScore, yearsManager.FinalYear.AverageScore, yearsManager.PlacementYear.AverageScore);
+                calculatedPercentage = (double)UniversityGradeCalculator.CalculateFinalGrade(yearsManager.SecondYear.CurrentAverageScore, yearsManager.FinalYear.CurrentAverageScore, yearsManager.PlacementYear.CurrentAverageScore);
             }
             else
             {
-                calculatedPercentage = (double)UniversityGradeCalculator.CalculateFinalGrade(yearsManager.SecondYear.AverageScore, yearsManager.FinalYear.AverageScore);
+                calculatedPercentage = (double)UniversityGradeCalculator.CalculateFinalGrade(yearsManager.SecondYear.CurrentAverageScore, yearsManager.FinalYear.CurrentAverageScore);
             }
 
             UpdateDegreeClassification(calculatedPercentage);
@@ -77,7 +77,7 @@
                 double remainingWeighting = (double)(120 - unfinishedYear.TotalCredits) / 100;
                 for (int i = 0; i != 100; i++)
                 {
-                    double scoreToGet = unfinishedYear.AverageScore + (i * remainingWeighting);
+                    double scoreToGet = (remainingWeighting * i) - unfinishedYear.CurrentAverageScore;
                     if (scoreToGet >= targetGrade)
                     {
                         return i;
